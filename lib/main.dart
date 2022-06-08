@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rlcesi/pages/Authentication/authenticationScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(body: Center(child: Text('Coucou Loic !'),)),
+      home: AuthScreen(),
     );
   }
 }
