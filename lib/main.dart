@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(body: Text('Coucou Loic !')),
+      home: Scaffold(body: Center(child: Text('Coucou Loic !'),)),
     );
   }
 }
