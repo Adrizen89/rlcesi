@@ -10,16 +10,13 @@ class Wrapper extends StatefulWidget {
 class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LayoutBuilder(
+    return Scaffold(body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth > 600) {
-            return Container();
-          } else {
-            return Container();
-          }
-        }
-      )
-    );
+      if (constraints.maxWidth > 600) {
+        return Container();
+      } else {
+        return Container();
+      }
+    }));
   }
 }
