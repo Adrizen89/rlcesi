@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rlcesi/pages/Authentication/authenticationScreen.dart';
+import 'package:rlcesi/pages/wrapper/wrapperScreen.dart';
+import 'package:rlcesi/pages/registrationScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +14,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AuthScreen(),
+      home: registrationScreen(),
     );
   }
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Wrapper extends StatefulWidget {
-  Wrapper({Key? key}) : super(key: key);
+class registrationScreen extends StatefulWidget {
+  registrationScreen({Key? key}) : super(key: key);
 
   @override
-  State<Wrapper> createState() => _WrapperState();
+  State<registrationScreen> createState() => _registrationScreenState();
 }
 
-class _WrapperState extends State<Wrapper> {
+class _registrationScreenState extends State<registrationScreen> {
   @override
   double corner = 25;
 
@@ -33,11 +33,11 @@ class _WrapperState extends State<Wrapper> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(
-                        left: 50,
-                        right: 50,
+                        top: 20,
+                        bottom: 20,
                       ),
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      height: MediaQuery.of(context).size.height * 0.5,
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      height: MediaQuery.of(context).size.height * 0.85,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
