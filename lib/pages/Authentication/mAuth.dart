@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rlcesi/commons/constants.dart';
 import 'package:rlcesi/pages/Authentication/mRegister.dart';
+import 'package:rlcesi/pages/wrapper/mNavBar.dart';
 
 class MAuthScreen extends StatefulWidget {
   MAuthScreen({Key? key}) : super(key: key);
@@ -49,7 +50,13 @@ class _MAuthScreenState extends State<MAuthScreen> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
                       ),
-                  onPressed: () {}, 
+                  onPressed: () {
+                     Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MNavBar(),
+                    ));
+                  }, 
                   child: Text('Se connecter')),
                 ),
                   SizedBox(height: w*0.05,),

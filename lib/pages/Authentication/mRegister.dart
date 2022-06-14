@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rlcesi/commons/constants.dart';
 
+enum Role { lecteur, redacteur }
 class MRegisterScreen extends StatefulWidget {
   MRegisterScreen({Key? key}) : super(key: key);
 
@@ -9,6 +10,9 @@ class MRegisterScreen extends StatefulWidget {
 }
 
 class _MRegisterScreenState extends State<MRegisterScreen> {
+
+  Role _site = Role.lecteur;
+
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
@@ -34,6 +38,12 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
             child: Form(
                 child: Column(
               children: [
+                Container(
+                  width: w*0.1,
+                  height: w*0.1,
+                  color: Colors.blueGrey,
+                ),
+                SizedBox(height: w*0.02,),
                 TextFormField(
                   decoration : textInputDecoration.copyWith(labelText: 'Nom')
                 ),
@@ -48,6 +58,31 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
                   decoration : textInputDecoration.copyWith(labelText: 'Adresse email')
                 ), 
                 SizedBox(height: w*0.03,),
+                ListTile(
+                  title: Text('Rédacteur'),
+                  leading: Radio(
+                    value : Role.redacteur,
+                    groupValue: _site,
+                    onChanged: (Role? value) {
+                      setState(() {
+                        _site = value!;
+                      });
+                    },
+                  ),
+                ),
+                ListTile(
+                  title: Text('Lecteur'),
+                  leading: Radio(
+                    value : Role.lecteur,
+                    groupValue: _site,
+                    onChanged: (Role? value) {
+                      setState(() {
+                        _site = value!;
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(height: w*0.02,),
                 TextFormField(
                   decoration : textInputDecoration.copyWith(labelText: 'Mot de passe')
                 ),

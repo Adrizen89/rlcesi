@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rlcesi/pages/Authentication/authenticationScreen.dart';
 import 'package:rlcesi/pages/wrapper/wrapperScreen.dart';
-import 'package:rlcesi/pages/registrationScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: registrationScreen(),
+      home: Wrapper(),
     );
   }
 }

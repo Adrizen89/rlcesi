@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:rlcesi/pages/Authentication/mAuth.dart';
 
-class registrationScreen extends StatefulWidget {
-  registrationScreen({Key? key}) : super(key: key);
+class WAuthScreen extends StatefulWidget {
+  WAuthScreen({Key? key}) : super(key: key);
 
   @override
-  State<registrationScreen> createState() => _registrationScreenState();
+  State<WAuthScreen> createState() => _WAuthScreenState();
 }
 
-class _registrationScreenState extends State<registrationScreen> {
+class _WAuthScreenState extends State<WAuthScreen> {
   @override
   double corner = 25;
 
   Widget build(BuildContext context) {
-    return Scaffold(body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      if (constraints.maxWidth > 800) {
-        return Container(
+    return Scaffold(body: Container(
           child: Row(
             children: [
               Container(
@@ -61,10 +58,7 @@ class _registrationScreenState extends State<registrationScreen> {
               ),
             ],
           ),
-        );
-      } else {
-        return MAuthScreen();
-      }
-    }));
+        )
+    );
   }
 }
