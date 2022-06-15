@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rlcesi/commons/constants.dart';
 import 'package:rlcesi/pages/Authentication/mRegister.dart';
 import 'package:rlcesi/pages/wrapper/mNavBar.dart';
+import 'package:rlcesi/services/validator.dart';
 
 class MAuthScreen extends StatefulWidget {
   MAuthScreen({Key? key}) : super(key: key);
@@ -23,15 +24,17 @@ class _MAuthScreenState extends State<MAuthScreen> {
           SizedBox(height: w*0.1,),
           Center(
               child: Container(
-                width: w*0.5,
+                width: w*0.8,
             child: Form(
                 child: Column(
               children: [
                 TextFormField(
+                  validator: FieldValidator.validateEmail,
                   decoration : textInputDecoration.copyWith(labelText: 'Adresse email')
                 ), 
                 SizedBox(height: w*0.03,),
                 TextFormField(
+                  validator: FieldValidator.validatePassword,
                   decoration : textInputDecoration.copyWith(labelText: 'Mot de passe')
                 ),
                 SizedBox(height: w*0.02,),
@@ -57,7 +60,7 @@ class _MAuthScreenState extends State<MAuthScreen> {
                       builder: (context) => MNavBar(),
                     ));
                   }, 
-                  child: Text('Se connecter')),
+                  child: Text('Se connecter', style: TextStyle(fontSize: w*0.05),)),
                 ),
                   SizedBox(height: w*0.05,),
                 GestureDetector(
