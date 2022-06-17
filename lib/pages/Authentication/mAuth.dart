@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rlcesi/commons/constants.dart';
 import 'package:rlcesi/pages/Authentication/mRegister.dart';
 import 'package:rlcesi/pages/wrapper/mNavBar.dart';
+import 'package:rlcesi/services/FireAuth.dart';
 import 'package:rlcesi/services/validator.dart';
 
 class MAuthScreen extends StatefulWidget {
@@ -12,6 +14,18 @@ class MAuthScreen extends StatefulWidget {
 }
 
 class _MAuthScreenState extends State<MAuthScreen> {
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
@@ -29,11 +43,13 @@ class _MAuthScreenState extends State<MAuthScreen> {
                 child: Column(
               children: [
                 TextFormField(
+                  controller: emailController,
                   validator: FieldValidator.validateEmail,
                   decoration : textInputDecoration.copyWith(labelText: 'Adresse email')
                 ), 
                 SizedBox(height: w*0.03,),
                 TextFormField(
+                  controller: passwordController,
                   validator: FieldValidator.validatePassword,
                   decoration : textInputDecoration.copyWith(labelText: 'Mot de passe')
                 ),
@@ -54,11 +70,11 @@ class _MAuthScreenState extends State<MAuthScreen> {
                                 BorderRadius.all(Radius.circular(10))),
                       ),
                   onPressed: () {
-                     Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MNavBar(),
-                    ));
+                    signIn(
+                      emailController.text.trim(),
+                      passwordController.text.trim(),
+                      context
+                    );
                   }, 
                   child: Text('Se connecter', style: TextStyle(fontSize: w*0.05),)),
                 ),
@@ -81,5 +97,7 @@ class _MAuthScreenState extends State<MAuthScreen> {
       ),
       )
     );
+
   }
+  
 }

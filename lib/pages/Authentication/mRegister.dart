@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rlcesi/commons/constants.dart';
+import 'package:rlcesi/services/FireAuth.dart';
 
 enum Role { lecteur, redacteur }
 class MRegisterScreen extends StatefulWidget {
@@ -10,6 +11,18 @@ class MRegisterScreen extends StatefulWidget {
 }
 
 class _MRegisterScreenState extends State<MRegisterScreen> {
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final nameController = TextEditingController();
+  @override
+    void dispose() {
+      emailController.dispose();
+      passwordController.dispose();
+      nameController.dispose();
+
+      super.dispose();
+    }
 
   Role _site = Role.lecteur;
 
@@ -100,7 +113,13 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
                       ),
-                  onPressed: () {}, 
+                  onPressed: () {
+                    signUp(
+                      emailController.text.trim(), 
+                      passwordController.text.trim(), 
+                      nameController.text.trim(),
+                      context);
+                  }, 
                   child: Text('S\'inscrire')),
                 ),
                   SizedBox(height: w*0.05,),

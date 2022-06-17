@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rlcesi/commons/constants.dart';
 import 'package:rlcesi/pages/Accueil/mAccueil.dart';
@@ -24,6 +25,9 @@ class _MNavBarState extends State<MNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    
+    final user = FirebaseAuth.instance.currentUser!;
+
     List<Widget> _widgetOptions = <Widget>[
       MAccueilScreen(),
       MGroupeScreen(),

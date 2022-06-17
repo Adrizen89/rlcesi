@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:rlcesi/pages/Authentication/mAuth.dart';
 import 'package:rlcesi/pages/Authentication/wAuth.dart';
 
-class Wrapper extends StatefulWidget {
-  Wrapper({Key? key}) : super(key: key);
+class WrapperAuthScreen extends StatefulWidget {
+  WrapperAuthScreen({Key? key}) : super(key: key);
 
   @override
-  State<Wrapper> createState() => _WrapperState();
+  State<WrapperAuthScreen> createState() => _WrapperAuthScreenState();
 }
 
-class _WrapperState extends State<Wrapper> {
+class _WrapperAuthScreenState extends State<WrapperAuthScreen> {
   @override
   double corner = 25;
 
