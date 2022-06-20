@@ -30,7 +30,7 @@ Future signUp(email, password, name, context) async {
   }on FirebaseAuthException catch(e) {
     print(e);
   }
-  navigatorKey.currentState!.popUntil((route)=>route.isFirst);
+  //navigatorKey.currentState!.popUntil((route)=>route.isFirst);
 }
 
 Future signOut() async {
