@@ -8,6 +8,7 @@ import 'package:rlcesi/main.dart';
 Future signIn(email, password, context) async {
       showDialog(
         context: context, 
+        barrierDismissible: false,
         builder: (context) => Center(child: CircularProgressIndicator(),));
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(

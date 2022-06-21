@@ -1,19 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rlcesi/commons/constants.dart';
+import 'package:rlcesi/pages/Authentication/mRegister.dart';
+import 'package:rlcesi/pages/wrapper/mNavBar.dart';
 import 'package:rlcesi/services/FireAuth.dart';
 import 'package:rlcesi/services/validator.dart';
 
-enum Role { lecteur, redacteur }
-class MRegisterScreen extends StatefulWidget {
-  final Function() onClickSignIn;
-  MRegisterScreen({Key? key, required this.onClickSignIn}) : super(key: key);
+class MLoginScreen extends StatefulWidget {
+  final VoidCallback onClickSignUp;
+  MLoginScreen({Key? key, required this.onClickSignUp}) : super(key: key);
 
   @override
-  State<MRegisterScreen> createState() => _MRegisterScreenState();
+  State<MLoginScreen> createState() => _MLoginScreenState();
 }
 
-class _MRegisterScreenState extends State<MRegisterScreen> {
+class _MLoginScreenState extends State<MLoginScreen> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -26,26 +28,15 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
     super.dispose();
   }
 
-  Role _site = Role.lecteur;
-
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: (() {
-            Navigator.pop(context);
-          }),
-          icon:Icon(Icons.arrow_back, color: primaryColor,)
-        ),
-      ),
-      body: Column(
+      body: Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Bienvenue', style: TextStyle(fontSize: w*0.07),),
+          Text('Bonjour', style: TextStyle(fontSize: w*0.07),),
           SizedBox(height: w*0.1,),
           Center(
               child: Container(
@@ -81,23 +72,23 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
                                 BorderRadius.all(Radius.circular(10))),
                       ),
                   onPressed: () {
-                    signUp(
+                    signIn(
                       emailController.text.trim(),
                       passwordController.text.trim(),
                       context
                     );
                   }, 
-                  child: Text('S\'inscrire', style: TextStyle(fontSize: w*0.05),)),
+                  child: Text('Se connecter', style: TextStyle(fontSize: w*0.05),)),
                 ),
                   SizedBox(height: w*0.05,),
                 RichText(text: TextSpan(
                   style: TextStyle(color: Colors.black),
-                  text: 'Déjà un compte ?',
+                  text: 'Pas de compte ?',
                   children: [
                     TextSpan(
                       recognizer: TapGestureRecognizer()
-                      ..onTap = widget.onClickSignIn,
-                      text: 'Connectez-vous !',
+                      ..onTap = widget.onClickSignUp,
+                      text: 'S\'inscrire',
                       style: TextStyle(color: primaryColor)
                     )
                   ]
@@ -107,6 +98,9 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
           ))
         ],
       ),
+      )
     );
+
   }
+  
 }
