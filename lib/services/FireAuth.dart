@@ -21,16 +21,19 @@ Future signIn(email, password, context) async {
       navigatorKey.currentState!.popUntil((route)=>route.isFirst);
     }
 
-Future signUp(email, password, name, context) async {
+Future signUp(email, password, context) async {
   showDialog(
         context: context, 
+        barrierDismissible: false,
         builder: (context) => Center(child: CircularProgressIndicator(),));
   try {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email, 
+      password: password);
   }on FirebaseAuthException catch(e) {
     print(e);
   }
-  //navigatorKey.currentState!.popUntil((route)=>route.isFirst);
+   navigatorKey.currentState!.popUntil((route)=>route.isFirst);
 }
 
 Future signOut() async {

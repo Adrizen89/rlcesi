@@ -116,8 +116,7 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
                   onPressed: () {
                     signUp(
                       emailController.text.trim(), 
-                      passwordController.text.trim(), 
-                      nameController.text.trim(),
+                      passwordController.text.trim(),
                       context);
                   }, 
                   child: Text('S\'inscrire')),
