@@ -63,6 +63,8 @@ class _MLoginScreenState extends State<MLoginScreen> {
                     builder: ((context) => ForgotPasswordScreen() )),)
                 ),
                 SizedBox(height: w*0.1,),
+
+                //Btn se connecter
                 SizedBox(
                   width : w*0.5,
                   child: ElevatedButton(
@@ -85,7 +87,7 @@ class _MLoginScreenState extends State<MLoginScreen> {
                   }, 
                   child: Text('Se connecter', style: TextStyle(fontSize: w*0.05),)),
                 ),
-                  SizedBox(height: w*0.05,),
+                SizedBox(height: w*0.05,),
                 RichText(text: TextSpan(
                   style: TextStyle(color: Colors.black),
                   text: 'Pas de compte ?',

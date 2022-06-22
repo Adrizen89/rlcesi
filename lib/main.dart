@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:rlcesi/pages/Authentication/VerifyEmailScreen.dart';
 import 'package:rlcesi/pages/wrapper/wrapperAuthScreen.dart';
 import 'package:rlcesi/pages/wrapper/wrapperHomeScreen.dart';
 
@@ -22,7 +23,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: StreamBuilder<User?>(
+      home: MainPage()
+    );
+  }
+}
+
+class MainPage extends StatelessWidget {
+  const MainPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -32,12 +43,11 @@ class MyApp extends StatelessWidget {
             return Center(child: Text('Désolé l\'application est indisponible pour le moment !'),);
           }
           else if (snapshot.hasData) {
-            return WrapperHomeScreen();
+            return VerifyEmailScreen();
           } else {
             return WrapperAuthScreen();
           }
         },
       ),
-    );
-  }
+  );
 }

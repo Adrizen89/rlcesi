@@ -23,6 +23,14 @@ Future signIn(email, password, context) async {
       navigatorKey.currentState!.popUntil((route)=>route.isFirst);
     }
 
+Future signInAnonym() async {
+  try {
+    await FirebaseAuth.instance.signInAnonymously();
+  }on FirebaseAuthException catch (e) {
+    print (e);
+  }
+}
+
 Future signUp(email, password, context, formKey) async {
   final isValid = formKey.currentState!.validate();
   if (!isValid) return;
@@ -54,12 +62,23 @@ Future resetPassword(email, context) async {
   try {
     await FirebaseAuth.instance
     .sendPasswordResetEmail(email: email.trim());
-  
+  navigatorKey.currentState!.popUntil((route)=>route.isFirst);
   //Utils.showSnackBar('Réinitialisation email envoyé !');
-  Navigator.of(context).popUntil((route) => route.isFirst);
+  //Navigator.of(context).popUntil((route) => route.isFirst);
   } on FirebaseAuthException catch (e) {
     print(e);
     Navigator.of(context).pop();
 
   }
 }
+
+Future sendVerificationEmail() async {
+  try {
+    final user = FirebaseAuth.instance.currentUser!;
+  await user.sendEmailVerification();
+  } catch (e) {
+    print (e);
+    //Utils.showSnackBar(e.toString());
+  }
+}
+
