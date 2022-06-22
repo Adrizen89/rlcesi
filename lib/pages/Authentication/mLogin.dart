@@ -28,6 +28,7 @@ class _MLoginScreenState extends State<MLoginScreen> {
 
     super.dispose();
   }
+  AuthenticationService _auth = AuthenticationService();
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +80,7 @@ class _MLoginScreenState extends State<MLoginScreen> {
                                 BorderRadius.all(Radius.circular(10))),
                       ),
                   onPressed: () {
-                    signIn(
+                    _auth.signInWithEmailAndPassword(
                       emailController.text.trim(),
                       passwordController.text.trim(),
                       context

@@ -3,53 +3,67 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rlcesi/main.dart';
+import 'package:rlcesi/models/user.dart';
+import 'package:rlcesi/services/Database.dart';
+import 'package:rlcesi/services/Notification.dart';
 import 'package:rlcesi/services/Utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+class AuthenticationService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-Future signIn(email, password, context) async {
-      showDialog(
+  AppUser? _userFromFirebaseUser(User? user) {
+    initUser(user);
+    return user != null ? AppUser(user.uid) : null;
+  }
+
+  void initUser(User? user) async {
+    if (user == null) return;
+    NotificationService.getToken().then((value) {
+      DatabaseService(user.uid).saveToken(value);
+    });
+  }
+
+  Stream<AppUser?> get user {
+    return _auth.authStateChanges().map(_userFromFirebaseUser);
+  }
+
+  Future signInWithEmailAndPassword(String email, String password, context) async {
+    showDialog(
         context: context, 
         barrierDismissible: false,
         builder: (context) => Center(child: CircularProgressIndicator(),));
-      try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email : email,
-      password : password
-      );
-      } on FirebaseAuthException catch (e) {
-        print(e);
-      }
-
-      navigatorKey.currentState!.popUntil((route)=>route.isFirst);
+    try {
+      UserCredential result =
+          await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User? user = result.user;
+      return _userFromFirebaseUser(user);
+    }on FirebaseAuthException catch (e) {
+      print(e);
     }
-
-Future signInAnonym() async {
-  try {
-    await FirebaseAuth.instance.signInAnonymously();
-  }on FirebaseAuthException catch (e) {
-    print (e);
+    navigatorKey.currentState!.popUntil((route)=>route.isFirst);
   }
-}
 
-Future signUp(email, password, context, formKey) async {
-  final isValid = formKey.currentState!.validate();
+  Future registerWithEmailAndPassword(String name, String email, String password, context, formKey) async {
+    final isValid = formKey.currentState!.validate();
   if (!isValid) return;
-  showDialog(
-        context: context, 
-        barrierDismissible: false,
-        builder: (context) => Center(child: CircularProgressIndicator(),));
-  try {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email, 
-      password: password);
-  }on FirebaseAuthException catch(e) {
-    print(e);
+    try {
+      UserCredential result =
+          await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      User? user = result.user;
+      if (user == null) {
+        throw Exception("No user found");
+      } else {
+        await DatabaseService(user.uid).saveUser(name, email);
 
-    //Utils.showSnackBar(e.message);
+        return _userFromFirebaseUser(user);
+      }
+    }on FirebaseAuthException catch (e) {
+      print(e);
+    } 
+    navigatorKey.currentState!.popUntil((route)=>route.isFirst);
   }
-   navigatorKey.currentState!.popUntil((route)=>route.isFirst);
-}
-
+  
 Future signOut() async {
   await FirebaseAuth.instance.signOut();
 }
@@ -81,4 +95,4 @@ Future sendVerificationEmail() async {
     //Utils.showSnackBar(e.toString());
   }
 }
-
+}

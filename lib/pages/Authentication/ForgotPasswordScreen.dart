@@ -12,7 +12,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final formKey = GlobalKey<FormState>();
-
+  AuthenticationService _auth = AuthenticationService();
   final emailController = TextEditingController();
 
   @override
@@ -54,7 +54,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
             ),
             onPressed: () {
-              resetPassword(emailController, context);
+              _auth.resetPassword(emailController, context);
             },
             child: Text(
               'Envoyer un email de récuparation',

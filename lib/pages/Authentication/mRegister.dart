@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rlcesi/commons/constants.dart';
@@ -16,6 +17,7 @@ class MRegisterScreen extends StatefulWidget {
 class _MRegisterScreenState extends State<MRegisterScreen> {
   final formKey = GlobalKey<FormState>();
 
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -26,6 +28,7 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
 
     super.dispose();
   }
+  AuthenticationService _auth = AuthenticationService();
 
   Role _site = Role.lecteur;
 
@@ -46,6 +49,11 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
             child: Form(
                 child: Column(
               children: [
+                TextFormField(
+                  controller: nameController,
+                  decoration : textInputDecoration.copyWith(labelText: 'Nom')
+                ), 
+                SizedBox(height: w*0.03,),
                 TextFormField(
                   controller: emailController,
                   validator: FieldValidator.validateEmail,
@@ -73,8 +81,9 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
                       ),
-                  onPressed: () {
-                    signUp(
+                  onPressed: () async {
+                   await _auth.registerWithEmailAndPassword(
+                      nameController.text.trim(),
                       emailController.text.trim(),
                       passwordController.text.trim(),
                       context,

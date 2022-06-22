@@ -17,6 +17,7 @@ class VerifyEmailScreen extends StatefulWidget {
 class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
   bool isEmailVerified = false;
   Timer? timer;
+  AuthenticationService _auth = AuthenticationService();
   @override
   void initState() {
     super.initState();
@@ -24,7 +25,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
 
     if (!isEmailVerified) {
-      sendVerificationEmail();
+      _auth.sendVerificationEmail();
 
       Timer.periodic(
         Duration(seconds: 5),
