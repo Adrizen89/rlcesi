@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rlcesi/commons/constants.dart';
+import 'package:rlcesi/pages/Authentication/ForgotPasswordScreen.dart';
 import 'package:rlcesi/pages/Authentication/mRegister.dart';
 import 'package:rlcesi/pages/wrapper/mNavBar.dart';
 import 'package:rlcesi/services/FireAuth.dart';
@@ -56,7 +57,11 @@ class _MLoginScreenState extends State<MLoginScreen> {
                   decoration : textInputDecoration.copyWith(labelText: 'Mot de passe')
                 ),
                 SizedBox(height: w*0.02,),
-                Text('Mot de passe oublié ?'),
+                GestureDetector(
+                  child: Text('Mot de passe oublié ?'),
+                  onTap: ()=> Navigator.of(context).push(MaterialPageRoute(
+                    builder: ((context) => ForgotPasswordScreen() )),)
+                ),
                 SizedBox(height: w*0.1,),
                 SizedBox(
                   width : w*0.5,

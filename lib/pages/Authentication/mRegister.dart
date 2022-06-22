@@ -14,6 +14,7 @@ class MRegisterScreen extends StatefulWidget {
 }
 
 class _MRegisterScreenState extends State<MRegisterScreen> {
+  final formKey = GlobalKey<FormState>();
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -32,17 +33,9 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: (() {
-            Navigator.pop(context);
-          }),
-          icon:Icon(Icons.arrow_back, color: primaryColor,)
-        ),
-      ),
-      body: Column(
+      body: Form(
+        key: formKey,
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Bienvenue', style: TextStyle(fontSize: w*0.07),),
@@ -84,7 +77,8 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
                     signUp(
                       emailController.text.trim(),
                       passwordController.text.trim(),
-                      context
+                      context,
+                      formKey
                     );
                   }, 
                   child: Text('S\'inscrire', style: TextStyle(fontSize: w*0.05),)),
@@ -106,7 +100,7 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
             )),
           ))
         ],
-      ),
+      ),)
     );
   }
 }
