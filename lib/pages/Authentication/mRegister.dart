@@ -81,7 +81,7 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
                                 BorderRadius.all(Radius.circular(10))),
                       ),
                   onPressed: () async {
-                   FirebaseHandler().createUser(emailController.text, passwordController.text, nameController.text);
+                   FirebaseHandler().createUser(emailController.text.trim(), passwordController.text.trim(), nameController.text.trim());
                   }, 
                   child: Text('S\'inscrire', style: TextStyle(fontSize: w*0.05),)),
                 ),

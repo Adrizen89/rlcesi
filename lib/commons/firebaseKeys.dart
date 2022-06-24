@@ -1,4 +1,4 @@
-  String uidKey = "id";
+  String uidKey = "uid";
   String nameKey = "name";
   String imageUrlKey = "imageUrl";
   String followersKey = "followers";

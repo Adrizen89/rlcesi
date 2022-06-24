@@ -18,7 +18,7 @@ class FirebaseHandler {
       final User user = userCredential.user!;
       return user;
   }
-
+  //Register
   Future<User?> createUser(String email, String pwd, String name) async {
     final userCredential = await authInstance.createUserWithEmailAndPassword(
       email: email, 
@@ -27,13 +27,13 @@ class FirebaseHandler {
       Map<String, dynamic>usersMap = {
         nameKey : name, 
         imageUrlKey : "",
-        followersKey : [user.id],
+        followersKey : [user!.uid],
         followingKey : [],
-        uidKey : user.id!
+        uidKey : user.uid
       };
       //Add user
       addUserToFirebase(usersMap);
-      return user!;
+      return user;
   }
 
 
@@ -41,7 +41,7 @@ class FirebaseHandler {
   static final firestoreInstance = FirebaseFirestore.instance;
   final fire_user = firestoreInstance.collection(usersRef);
   addUserToFirebase(Map<String, dynamic> map) {
-    fire_user.doc(map[uidKey]);
+    fire_user.doc(map[uidKey]).set(map);
   }
 
 }

@@ -34,7 +34,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
+        stream: FirebaseAuth.instance.userChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -43,10 +43,10 @@ class MainPage extends StatelessWidget {
             return Center(child: Text('Désolé l\'application est indisponible pour le moment !'),);
           }
           else if (snapshot.hasData) {
-            return VerifyEmailScreen();
+            return WrapperHomeScreen(userUid : snapshot.data!.uid);
           } else {
             return WrapperAuthScreen();
-          }
+          };
         },
       ),
   );
