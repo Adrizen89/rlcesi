@@ -13,7 +13,6 @@ class MAccueilScreen extends StatefulWidget {
 
 class MAccueilScreenState extends State<MAccueilScreen> {
   final user = FirebaseAuth.instance.currentUser!;
-  AuthenticationService _auth = AuthenticationService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +20,7 @@ class MAccueilScreenState extends State<MAccueilScreen> {
         title: Text('Ressources Relationnelles'),
         actions: [
           IconButton(onPressed: () async {
-            await _auth.signOut();
+            //await _auth.signOut();
           }, 
           icon: Icon(Icons.logout))
         ],

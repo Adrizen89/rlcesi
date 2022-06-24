@@ -1,0 +1,1 @@
+String logoImg = "images/ressources_relationnelles_transparent.png";

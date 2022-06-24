@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rlcesi/commons/constants.dart';
+import 'package:rlcesi/models/darkmode.dart';
 import 'package:rlcesi/pages/Authentication/ForgotPasswordScreen.dart';
 import 'package:rlcesi/pages/Authentication/mRegister.dart';
 import 'package:rlcesi/pages/wrapper/mNavBar.dart';
@@ -28,12 +29,12 @@ class _MLoginScreenState extends State<MLoginScreen> {
 
     super.dispose();
   }
-  AuthenticationService _auth = AuthenticationService();
 
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: ColorTheme().base(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -80,11 +81,7 @@ class _MLoginScreenState extends State<MLoginScreen> {
                                 BorderRadius.all(Radius.circular(10))),
                       ),
                   onPressed: () {
-                    _auth.signInWithEmailAndPassword(
-                      emailController.text.trim(),
-                      passwordController.text.trim(),
-                      context
-                    );
+                    FirebaseHandler().signIn(emailController.text, passwordController.text);
                   }, 
                   child: Text('Se connecter', style: TextStyle(fontSize: w*0.05),)),
                 ),

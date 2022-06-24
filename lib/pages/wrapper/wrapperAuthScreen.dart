@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rlcesi/models/darkmode.dart';
 import 'package:rlcesi/pages/Authentication/mAuth.dart';
 import 'package:rlcesi/pages/Authentication/wAuth.dart';
 
@@ -14,6 +15,7 @@ class _WrapperAuthScreenState extends State<WrapperAuthScreen> {
   double corner = 25;
 
   Widget build(BuildContext context) {
+    print(ColorTheme().isDarkMode());
     return Scaffold(body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       if (constraints.maxWidth > 800) {

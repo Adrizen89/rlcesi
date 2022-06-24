@@ -1,13 +1,30 @@
-class AppUser {
-  final String uid;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rlcesi/commons/firebaseKeys.dart';
 
-  AppUser(this.uid);
-}
+class Member {
 
-class AppUserData {
-  final String uid;
-  final String name;
-  final int email;
+  String? id;
+  String? name;
+  String? imageUrl;
+  List<dynamic>? followers;
+  List<dynamic>? following;
+  DocumentReference? ref;
+  String? documentId;
+  String? description;
 
-  AppUserData({required this.uid, required this.name, required this.email});
+  Member(DocumentSnapshot snapshot) {
+    print(snapshot);
+  }
+  Map<String, dynamic> toMap(){
+    return {
+      uidKey : id,
+      nameKey : name,
+      imageUrlKey : imageUrl,
+      followersKey : followers,
+      followingKey : following,
+      refKey : ref,
+      documentIdKey : documentId,
+      descriptionKey : description
+    };
+  }
 }

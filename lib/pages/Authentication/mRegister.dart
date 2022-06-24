@@ -28,7 +28,6 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
 
     super.dispose();
   }
-  AuthenticationService _auth = AuthenticationService();
 
   Role _site = Role.lecteur;
 
@@ -82,13 +81,7 @@ class _MRegisterScreenState extends State<MRegisterScreen> {
                                 BorderRadius.all(Radius.circular(10))),
                       ),
                   onPressed: () async {
-                   await _auth.registerWithEmailAndPassword(
-                      nameController.text.trim(),
-                      emailController.text.trim(),
-                      passwordController.text.trim(),
-                      context,
-                      formKey
-                    );
+                   FirebaseHandler().createUser(emailController.text, passwordController.text, nameController.text);
                   }, 
                   child: Text('S\'inscrire', style: TextStyle(fontSize: w*0.05),)),
                 ),
